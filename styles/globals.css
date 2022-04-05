@@ -1,16 +1,34 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.radar-axis {
+  stroke: #cbd5e1;
+  stroke-dasharray: 0;
+  stroke-width: 1;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.radar-quadrant-border {
+  stroke: #e2e8f0;
+  stroke-dasharray: 0;
+  stroke-width: 0.5;
+  fill: transparent;
 }
 
-* {
-  box-sizing: border-box;
+.radar-axis-label {
+  font: ui-sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  fill: #64748b;
+}
+
+.radar-quadrant-label {
+  font: ui-sans-serif;
+  font-size: 0.45rem;
+  font-weight: 200;
+  fill: #64748b;
+}
+
+.radar-dots {
+  fill: #0ea5e9;
 }
