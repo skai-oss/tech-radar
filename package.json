@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
+    "csvtojson": "^2.0.10",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0"

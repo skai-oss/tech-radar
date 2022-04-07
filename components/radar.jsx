@@ -56,7 +56,7 @@ const Radar = ({ data }) => {
           </text>
 
           <text x="39" y="198">
-            Asses
+            Assess
           </text>
 
           <text x="92" y="198">
@@ -72,7 +72,7 @@ const Radar = ({ data }) => {
           </text>
 
           <text x="362" y="198" textAnchor="end">
-            Asses
+            Assess
           </text>
           <text x="309" y="198" textAnchor="end">
             Trial

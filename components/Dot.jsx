@@ -3,7 +3,7 @@ import { useRef } from "react";
 const ranges = {
   ADOPT: [10, 65],
   TRIAL: [85, 115],
-  ASSES: [130, 165],
+  ASSESS: [130, 165],
   HOLD: [180, 185],
 };
 
@@ -14,7 +14,7 @@ const quadrants = {
   TOOLS: [275, 355],
 };
 
-const convert = (str) =>
+const convert = (str = "") =>
   str.replaceAll(" ", "").replaceAll("&", "").toUpperCase();
 
 const memo = {};
@@ -29,7 +29,7 @@ const Dot = ({
 }) => {
   const ref = useRef(null);
 
-  const calculatePosition = (quadrant, ring) => {
+  const calculatePosition = (quadrant, ring, name) => {
     if (memo[name]) return memo[name];
     const [rangeMin, rangeMax] = ranges[convert(ring)] || [];
     const range = Math.random() * (rangeMax - rangeMin) + rangeMin;
@@ -37,15 +37,13 @@ const Dot = ({
     const [degMin, degMax] = quadrants[convert(quadrant)] || [];
     const deg = Math.random() * (degMax - degMin) + degMin;
 
-    console.log(range, name);
-
     const cx = 200 + range * Math.cos((deg * Math.PI) / 180);
     const cy = 200 - range * Math.sin((deg * Math.PI) / 180);
     memo[name] = { cx, cy };
     return memo[name];
   };
 
-  const { cx, cy } = calculatePosition(quadrant, ring);
+  const { cx, cy } = calculatePosition(quadrant, ring, name);
 
   return (
     <>

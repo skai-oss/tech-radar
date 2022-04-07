@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.filter-item {
+  @apply flex rounded-md items-center w-full px-2 py-2 text-sm cursor-pointer;
+}
+
 .radar-axis {
   stroke: #cbd5e1;
   stroke-dasharray: 0;
