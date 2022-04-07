@@ -11,7 +11,10 @@ const Radar = ({ data }) => {
   const onMouseEnter = ({ ref, name, ring, quadrant, description }) => {
     closeInProgress && clearTimeout(closeInProgress);
     const { top, left } = ref.current.getBoundingClientRect();
-    setTooltip({ top, left, name, ring, quadrant, description });
+    setTimeout(
+      () => setTooltip({ top, left, name, ring, quadrant, description }),
+      400
+    );
   };
 
   const onMouseLeave = () => {
@@ -100,8 +103,6 @@ const Radar = ({ data }) => {
               {...item}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
-              cx="30"
-              cy="180"
             />
           ))}
         </g>

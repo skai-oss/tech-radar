@@ -22,15 +22,19 @@ const Tooltip = ({
     };
   }, []);
 
+  const deltaX =
+    window.innerWidth - (left + 384 + 12) > 0 ? "20px" : `-${384 + 12}px`;
+  const deltaY =
+    window.innerHeight - (top + 384 + 12) > 0 ? "20px" : `-${384 + 12}px`;
   return el !== null
     ? ReactDOM.createPortal(
         <div
-          className="max-w-lg bg-white px-4 py-5 shadow border sm:rounded-lg sm:px-6"
+          className="w-96 h-96 bg-white px-4 py-5 shadow border sm:rounded-lg sm:px-6 overflow-y-auto"
           style={{
             position: "fixed",
             top: top,
             left: left,
-            transform: "translate(20px, 20px)",
+            transform: `translate(${deltaX}, ${deltaY})`,
           }}
           onMouseEnter={onTooltipAccess}
           onMouseLeave={onMouseLeave}

@@ -8,16 +8,32 @@ const ranges = {
 };
 
 const quadrants = {
-  PLATFORMS: [85, 175],
-  LANGUAGESFRAMEWORKS: [5, 85],
-  TECHNIQUES: [185, 265],
-  TOOLS: [275, 355],
+  PLATFORMS: [95, 165],
+  LANGUAGESFRAMEWORKS: [15, 75],
+  TECHNIQUES: [195, 255],
+  TOOLS: [285, 345],
 };
 
 const convert = (str = "") =>
   str.replaceAll(" ", "").replaceAll("&", "").toUpperCase();
 
 const memo = {};
+
+const attempt = ({ rangeMax, rangeMin, degMax, degMin }, attempts = 0) => {
+  const range = Math.random() * (rangeMax - rangeMin) + rangeMin;
+  const deg = Math.random() * (degMax - degMin) + degMin;
+  const x = 200 + range * Math.cos((deg * Math.PI) / 180);
+  const y = 200 - range * Math.sin((deg * Math.PI) / 180);
+
+  const collision = Object.values(memo).find(({ cx, cy }) => {
+    const distance = Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2));
+    return distance < 14;
+  });
+
+  return collision && attempts < 10
+    ? attempt({ rangeMax, rangeMin, degMax, degMin }, attempts++)
+    : { cx: x, cy: y };
+};
 
 const Dot = ({
   name,
@@ -32,14 +48,8 @@ const Dot = ({
   const calculatePosition = (quadrant, ring, name) => {
     if (memo[name]) return memo[name];
     const [rangeMin, rangeMax] = ranges[convert(ring)] || [];
-    const range = Math.random() * (rangeMax - rangeMin) + rangeMin;
-
     const [degMin, degMax] = quadrants[convert(quadrant)] || [];
-    const deg = Math.random() * (degMax - degMin) + degMin;
-
-    const cx = 200 + range * Math.cos((deg * Math.PI) / 180);
-    const cy = 200 - range * Math.sin((deg * Math.PI) / 180);
-    memo[name] = { cx, cy };
+    memo[name] = attempt({ rangeMax, rangeMin, degMax, degMin });
     return memo[name];
   };
 
