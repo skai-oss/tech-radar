@@ -1,3 +1,4 @@
+import { ADOPT, ASSESS, HOLD, TRIAL } from "../utils/types";
 import RingDetails from "./RingDetails";
 
 const Entries = ({ data, onClick }) => {
@@ -13,13 +14,13 @@ const Entries = ({ data, onClick }) => {
         <div className="w-full mx-auto bg-white rounded-2xl flex flex-col gap-4 mt-4">
           <RingDetails
             data={data}
-            filter={"Adopt"}
+            filter={ADOPT}
             defaultOpen={true}
             onClick={onClick}
           />
-          <RingDetails data={data} filter={"Trial"} onClick={onClick} />
-          <RingDetails data={data} filter={"Assess"} onClick={onClick} />
-          <RingDetails data={data} filter={"Hold"} onClick={onClick} />
+          <RingDetails data={data} filter={TRIAL} onClick={onClick} />
+          <RingDetails data={data} filter={ASSESS} onClick={onClick} />
+          <RingDetails data={data} filter={HOLD} onClick={onClick} />
         </div>
       </div>
     </>

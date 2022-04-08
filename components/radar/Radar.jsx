@@ -1,5 +1,17 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import {
+  ADOPT,
+  ASSESS,
+  HOLD,
+  LANGUAGES_FRAMEWORKS,
+  PLATFORMS,
+  QUADRANTS_DISPLAY_NAMES,
+  RINGS_DISPLAY_NAMES,
+  TECHNIQUES,
+  TOOLS,
+  TRIAL,
+} from "../../utils/types";
 
 const Tooltip = dynamic(() => import("./Tooltip"), { ssr: false });
 const Dot = dynamic(() => import("./Dot"), { ssr: false });
@@ -40,48 +52,48 @@ const Radar = ({ data }) => {
       >
         <g className="radar-axis-label">
           <text x="0" y="15">
-            Platforms
+            {QUADRANTS_DISPLAY_NAMES[PLATFORMS]}
           </text>
           <text x="400" y="15" textAnchor="end">
-            Languages & frameworks
+            {QUADRANTS_DISPLAY_NAMES[LANGUAGES_FRAMEWORKS]}
           </text>
           <text x="0" y="396">
-            Techniques
+            {QUADRANTS_DISPLAY_NAMES[TECHNIQUES]}
           </text>
           <text x="400" y="396" textAnchor="end">
-            Tools
+            {QUADRANTS_DISPLAY_NAMES[TOOLS]}
           </text>
         </g>
 
         <g className="radar-quadrant-label">
           <text x="4" y="198">
-            Hold
+            {RINGS_DISPLAY_NAMES[HOLD]}
           </text>
 
           <text x="39" y="198">
-            Assess
+            {RINGS_DISPLAY_NAMES[ASSESS]}
           </text>
 
           <text x="92" y="198">
-            Trial
+            {RINGS_DISPLAY_NAMES[TRIAL]}
           </text>
 
           <text x="154" y="198">
-            Adopt
+            {RINGS_DISPLAY_NAMES[ADOPT]}
           </text>
 
           <text x="399" y="198" textAnchor="end">
-            Hold
+            {RINGS_DISPLAY_NAMES[HOLD]}
           </text>
 
           <text x="362" y="198" textAnchor="end">
-            Assess
+            {RINGS_DISPLAY_NAMES[ASSESS]}
           </text>
           <text x="309" y="198" textAnchor="end">
-            Trial
+            {RINGS_DISPLAY_NAMES[TRIAL]}
           </text>
           <text x="247" y="198" textAnchor="end">
-            Adopt
+            {RINGS_DISPLAY_NAMES[ADOPT]}
           </text>
         </g>
 

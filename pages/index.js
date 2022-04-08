@@ -4,17 +4,19 @@ import path from "path";
 import { useState } from "react";
 import csvToJson from "csvtojson";
 
-import Radar from "../components/Radar";
+import Radar from "../components/radar/Radar";
 import MainSection from "../components/layout/MainSection";
 import SideSection from "../components/layout/SideSection";
 import Header from "../components/Header";
 import Entries from "../components/Entries";
 import Details from "../components/Detail";
+import { prepareGraphData } from "../utils/graph_utils";
 
 export const getStaticProps = async () => {
   const filePath = path.join(process.cwd(), "data", "data.csv");
   const stats = fs.statSync(filePath);
-  const data = await csvToJson().fromFile(filePath);
+  const csvData = await csvToJson().fromFile(filePath);
+  const data = prepareGraphData(csvData);
   return {
     props: {
       data,

@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon, ChevronRightIcon } from "@heroicons/react/outline";
+import { convert, RINGS_DISPLAY_NAMES } from "../utils/types";
 
 const RingDetails = ({ data, filter, defaultOpen, onClick }) => {
   return (
@@ -7,7 +8,7 @@ const RingDetails = ({ data, filter, defaultOpen, onClick }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-blue-900 bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-            <span>{filter}</span>
+            <span>{RINGS_DISPLAY_NAMES[filter]}</span>
             <ChevronUpIcon
               className={`${
                 open ? "transform rotate-180" : ""
@@ -17,7 +18,7 @@ const RingDetails = ({ data, filter, defaultOpen, onClick }) => {
           <Disclosure.Panel className=" text-sm text-gray-500 -mt-1">
             <ul role="list" className="flex flex-col gap-2">
               {data
-                .filter((item) => item.ring === filter)
+                .filter((item) => convert(item.ring) === filter)
                 .map((item) => (
                   <li key={item.name} className="">
                     <button
