@@ -8,6 +8,9 @@ export const TRIAL = "TRIAL";
 export const ASSESS = "ASSESS";
 export const HOLD = "HOLD";
 
+export const QUADRANTS = "QUADRANTS";
+export const RINGS = "RINGS";
+
 export const convert = (str = "") =>
   str.replaceAll(" ", "").replaceAll("&", "").toUpperCase();
 
@@ -23,4 +26,9 @@ export const QUADRANTS_DISPLAY_NAMES = {
   [LANGUAGES_FRAMEWORKS]: "Languages & Frameworks",
   [TECHNIQUES]: "Techniques",
   [TOOLS]: "Tools",
+};
+
+export const FILTERS = {
+  [QUADRANTS]: [PLATFORMS, LANGUAGES_FRAMEWORKS, TECHNIQUES, TOOLS],
+  [RINGS]: [ADOPT, ASSESS, HOLD, TRIAL],
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Dot from "./Dot";
 import {
   ADOPT,
   ASSESS,
@@ -14,7 +15,6 @@ import {
 } from "../../utils/types";
 
 const Tooltip = dynamic(() => import("./Tooltip"), { ssr: false });
-const Dot = dynamic(() => import("./Dot"), { ssr: false });
 
 const Radar = ({ data }) => {
   const [tooltip, setTooltip] = useState(null);
@@ -25,7 +25,7 @@ const Radar = ({ data }) => {
     const { top, left } = ref.current.getBoundingClientRect();
     setTimeout(
       () => setTooltip({ top, left, name, ring, quadrant, description }),
-      400
+      200
     );
   };
 
