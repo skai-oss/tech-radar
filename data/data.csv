@@ -1,0 +1,95 @@
+name,ring,quadrant,description
+Airflow,Adopt,Platforms,"[Airflow](https://airflow.apache.org/) uses directed acyclic graphs (DAGs) to manage workflow orchestration. Tasks and dependencies are defined in Python, and then Airflow manages the scheduling and execution.
+
+In Skai, Airflow is used by many teams for various use cases. It is hosted on [Astronomer](https://www.astronomer.io/) and has full CI/CD support."
+Amazon SageMaker,Trial,Platforms,"[Amazon SageMaker (SM)](https://aws.amazon.com/sagemaker/) is a fully-managed service that enables data scientists and developers to build quickly, train, and deploy machine learning models at scale. 
+
+In Skai, SM is used across all ML projects. However, SM is not an ML platform but a collection of building blocks that requires some heavy-lifting to develop and deliver an ML project. See the ML Platform item for more on this."
+API Gateway,Adopt,Tools,"API Gateway is used to manage and expose backend APIs securely. In Skai, we use [Kong](https://konghq.com/kong) as the gateway for public APIs.
+
+In addition, we use the API Gateway internally in the following scenarios:
+1. To solve CORS issues, usually when the UI needs to call a backend service directly.
+2. To trigger AWS Lambdas via REST calls. In this case, we use [AWS API Gateway](https://aws.amazon.com/api-gateway/).
+
+Kong configuration management is done using an internal tool called [king-kong](https://medium.com/kenshoos-engineering-blog/king-of-our-kong-how-we-built-a-configuration-management-tool-for-kong-b1bd4757365a)."
+AWS Lambda,Trial,Platforms,"[AWS Lambda](https://aws.amazon.com/lambda/) is a serverless compute service that runs code in response to events and automatically manages the underlying compute resources. As a result, it improves resource utilization, enables event-driven architectures and reduces the operations hassle.
+
+In Skai, so far, we've been utilizing Lambda primarily for operations. However, with the Infrastructure-as-Code enablement (provided with [Pulumi](https://www.pulumi.com/)), Lambda is becoming accessible for all application teams. 
+
+You can start using Lambda, especially for fast proof-of-concept implementations, without managing new microservices."
+BDD (Behaviour-driven development) ,Trial,Techniques,"[BDD (Behaviour-driven development)](https://en.wikipedia.org/wiki/Behavior-driven_development) means writing tests using [Cucumber](https://cucumber.io/)/ [Karate](https://karatelabs.github.io/karate/) to describe the behavior of the feature before developing it. 
+
+In Skai, some teams already work this way and can find critical defects, reduce dev time, increase the trust in tests coverage, etc."
+Clean Code,Adopt,Techniques,"[Clean code](https://learning.oreilly.com/library/view/clean-code-a/9780136083238/) is a set of principles for writing high-quality and maintainable code. 
+
+In Skai, we promote & practice clean code methodologies as part of our onboarding, development and code review processes."
+Data Mesh,Trial,Techniques,"[Data Mesh](https://martinfowler.com/articles/data-mesh-principles.html) is a data platform architecture that encourages teams' ownership of their data by providing self-serve tooling and over-arching governance. 
+
+In Skai, we're rebuilding our data platform according to the data mesh principles."
+Formik (Form state management library),Adopt,Languages & frameworks,"[Formik](https://formik.org/) provides a simplified way of managing the state and validations in a React form. 
+
+In Skai, we trialed with Formik in numerous Skai UI components and found it valuable. Using it ensures that we do not write our state management and validation solution in every dialog, reducing the resources required to deliver features."
+Gradle,Adopt,Tools,"[Gradle](https://gradle.org/) is our tool of choice for building JVM-based projects. It's been proven to be more effective and flexible than its alternatives (Maven, SBT). 
+
+In Skai, we've built significant expertise and a toolset (e.g., plugins) that makes Gradle optimal for our needs. Therefore, JVM projects not using Gradle should be migrated to Gradle. "
+GraphQL,Trial,Languages & frameworks,"[GraphQL](https://graphql.org/) is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
+
+In Skai, we assessed the technology in a POC and are looking for the opportunity to validate our assumptions in a real-world scenario. The benefit of this tech is to allow a single UI application to have a more flexible interface with a broad range of microservices. In addition, the planned Spring Boot 2.7 native support for GraphQL should simplify using it as part of our backend stack."
+Hadoop,Hold,Platforms,"[Hadoop](https://hadoop.apache.org/) is an open-source big data ecosystem that we have used in Skai.
+
+We're amidst an extensive project of deprecating Hadoop and replacing different parts of this ecosystem with other platforms & tools. For example, [Snowflake](https://www.snowflake.com/) replaces Hive and Impala, and [Databricks](https://databricks.com/) provides Spark clusters. While the deprecation is still in progress and existing workloads are being migrated to the new platforms, no new workloads should be developed on Hadoop."
+Immutability,Adopt,Techniques,"Immutability allows code to be more easily written, read and reasoned about. In object-oriented and functional programming, an immutable object's state cannot be modified after it is created. Immutable objects are simple and predictable. An immutable object can be in exactly one state, the state in which it was created. Immutable objects are inherently thread-safe and require no synchronization. 
+
+In all Skai codebases, existing and new, Immutability should be adopted both in objects definitions and as a technical design KPI."
+Java 17,Trial,Languages & frameworks,"Staying up to date with Java versions is not an easy task, but with Scala's sunsetting and the many great features included in [Java 17](https://www.infoq.com/news/2021/09/java17-released/) - it's time for us to make the first steps towards an upgrade. Java 17 not only promises better support for functional programming (via features like Pattern Matching, Java Records and more), it is also the new long-term support (LTS) version of Java.
+
+In Skai, while a full-on migration plan for our services is yet to come, Java 17 is the default version for new Java microservices."
+Kubiverse,Adopt,Platforms,"Kubiverse is a Skai in-house microservices lifecycle management platform. When a team wants to create a new microservice, it should do it using Kubiverse. 
+
+Kubiverse generates new GitHub repos according to pre-defined templates, provisions the microservices on Kubernetes, creates a CI/CD pipeline out-of-the-box and enables managing the service's resources configuration and environments variables.
+
+Kubiverse is fully-supported and owned by our DevOps group."
+Microservices: Prefer API tests for BDD,Trial,Techniques,"In Skai, our microservice templates contain infrastructure for creating two types of behavioral tests - API tests (using [Karate](https://karatelabs.github.io/karate/)) and in-process integration tests (using [Cucumber](https://cucumber.io/)). We should opt for an API test for microservices whose primary interfaces are RESTful.
+
+The benefits of API tests over Cucumber tests outweigh their downsides: they cover more functionality (e.g., HTTP statuses) with little-to-no extra effort; They provide an excellent source of documentation (thanks to Karate's syntax); They test the application in complete isolation, closest to production. And they can easily be reused as Smoke tests in staging and production when relevant. One should fall back to using Cucumber only in the rare cases where API tests are insufficient, e.g., when a component of the application must be replaced with a stub or when necessary test data can't be populated via an API call. 
+
+We've placed this item in ""Trial"" until we collect all use cases where Cucumber tests are necessary. Once we're convinced that's rarely the case, Cucumber infrastructure should be removed from the templates and added only where necessary."
+ML Platform,Trial,Platforms,"Machine Learning (ML) Platform enables an end-to-end delivery of ML projects. Optimally, it should support development, deployment, features & models management, pipelines, serving, training & production monitoring, and other aspects of the project.
+
+In Skai, we're in the midst of a trial of managed ML Platforms to achieve the requirements above and enhance the delivery of our ML Projects.
+[MLflow](https://mlflow.org/) is an open-source platform providing only some of the aspects of the ML lifecycle. We're currently using it extensively only for experiment tracking."
+Monte Carlo,Assess,Tools,"[Monte Carlo](https://www.montecarlodata.com/) is a data observability tool that monitors and alerts for data issues across data warehouses, data lakes, ETL, and business intelligence. 
+
+Such a tool can be valuable for monitoring our analytical data streams in the future."
+NextJS,Adopt,Languages & frameworks,"[NextJS](https://nextjs.org/) is a front-end framework with the goal of producing performant UIs through best practices. 
+
+NextJS, being React-based and very developer experience oriented, proved to be a good choice in Skai when starting a new project, allowing new developers to start up very quickly and maintain good practices during development. We're already using it across different projects in the company and provide project templates, provisioning and CI/CD for it."
+Prefer native language APIs over 3rd party libs,Adopt,Techniques,"The most stable APIs we have available for any of the languages we use are the language's native APIs. Whether the language guarantees backward compatibility or migration guides, using these APIs creates the least amount of compatibility issues and dependencies conflicts which any 3rd party library for general utils is prone to. Therefore whenever possible, use the native language APIs. Examples: use java.time instead of joda.time; use Java's Collections APIS instead of Guava's Collections APIs or apache ""commons"" APIs."
+Pulumi,Trial,Platforms,"[Pulumi](https://www.pulumi.com/) is an Infrastructure-as-Code (IaC) framework, allowing to spin up cloud resources using native programmatic languages such as Python or Go, and maintain their state using its managed platform.
+
+In Skai, Pulumi is already adopted by the DevOps group to replace [Terraform](https://www.terraform.io/) for managing cloud resources. The next step is onboarding application development teams to use it as a self-serve cloud resources management tool, increasing their ability to own their services fully."
+Risk-based testing,Adopt,Techniques,"[Risk-based testing](https://en.wikipedia.org/wiki/Risk-based_testing) (RBT) is a methodology that prioritizes the tests of features based on the risk of functions failure to focus on the impactful scenarios.
+
+In Skai, we want to focus QA and development on the risks to avoid over-testing and to identify where we can move quicker and where we need to invest more in mitigation. 
+For more: [internal link](https://stackoverflow.com/c/kenshoo/articles/1374)"
+Scala,Hold,Languages & frameworks,"Scala was introduced in Skai back in 2014. It was chosen as an additional formal programming language in our stacks due to its popularity, expressiveness, immutable and functional nature, and other benefits. The onboarding included training and workshops, nurturing subject-matter experts, and eventually, some teams started developing new services and libraries with Scala.
+
+Since then, some things have changed: Scala's popularity subsided, recruiting became harder, the Scala knowledge within the company decreased, and we see that Java, our main stack, is adopting many of Scala's benefits. Unfortunately, this situation reduced our flexibility, increased the maintenance costs, and slowed our growth.
+
+We will stop developing new services and components with Scala. The owning teams of existing ones will continue to maintain those until their EOL or migrated. Whenever a team is required to add a significant investment to its Scala component, they should consider alternative implementations, such as a Java module, a separate service, an AWS Lambda, etc."
+Self-testing code,Adopt,Techniques,"Self-testing code exists when you can run a series of automated tests against the code base and be confident that, should the tests pass, your code is free of any substantial defects.
+Self-testing code is a key part of Continuous Integration, and it's said that you aren't doing continuous integration unless you have self-testing code. As a pillar of Continuous Integration, it is also a necessary part of Continuous Delivery.
+
+In Skai, we should continue utilizing our automation infrastructures (JUnit, Karate, Cucumber and more) to maintain a high testing coverage."
+Single Store (Memsql) ,Adopt,Platforms,"[SingleStore](https://www.singlestore.com/) is a distributed, relational, SQL database management system that features ANSI SQL support and is known for speed in data ingest, transaction processing, and query processing.
+ 
+In Skai, we've been using it for a few years across different grids to provide our users with a flexible and performant user experience."
+Spring Boot,Adopt,Languages & frameworks,"[Spring Boot](https://spring.io/projects/spring-boot) is an open-source Java framework for creating Spring-based applications and services.
+
+In Skai, Spring Boot is our new stack for microservices to be used for any new Java service, replacing Dropwizard as the default stack."
+Terraform,Hold,Tools,"[Terraform](https://www.terraform.io/) is an open-source Infrastructure-as-Code tool to manage cloud resources. However, unlike [Pulumi](https://www.pulumi.com/), it is declarative and not well-adopted among developers, preventing them from fully owning their cloud resources.
+
+In Skai, we've been using Terraform for various resources management. However, we're slowly deprecating it in favor of Pulumi so that it will manage all new cloud resources."
+Upsolver,Trial,Platforms,"[Upsolver](https://www.upsolver.com/) is a managed ETL platform aiming to simplify the creation and management of data pipelines.
+
+In Skai, we're onboarding Upsolver to ingest data into our Data Lake and provide self-serve tooling for the application development teams. It supports CDC from our operational DBs and other streaming sources (Kafka, Kinesis, etc.)."

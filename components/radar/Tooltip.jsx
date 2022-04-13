@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 const Tooltip = ({
   top,
@@ -43,7 +44,9 @@ const Tooltip = ({
             {quadrant} <b>·</b> <i>{ring}</i>
           </h4>
           <h3 className="font-medium text-gray-900 mb-2">{name}</h3>
-          <p className="text-sm text-gray-500">{description}</p>
+          <p className="text-sm text-gray-500  prose prose-base">
+            <ReactMarkdown>{description}</ReactMarkdown>
+          </p>
         </div>,
         el
       )

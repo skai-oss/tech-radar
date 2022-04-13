@@ -11,6 +11,8 @@ import Header from "../components/Header";
 import Entries from "../components/Entries";
 import Details from "../components/Detail";
 import { prepareGraphData } from "../utils/graph_utils";
+import LegendSection from "../components/layout/LegendSection";
+import Legend from "../components/Legend";
 
 export const getStaticProps = async () => {
   const filePath = path.join(process.cwd(), "data", "data.csv");
@@ -27,6 +29,7 @@ export const getStaticProps = async () => {
 
 export default function TechRadar({ data, updated }) {
   const [selected, setSelected] = useState(null);
+  const selectedData = data.find((item) => item.name === selected) || null;
   return (
     <div>
       <Head>
@@ -44,16 +47,21 @@ export default function TechRadar({ data, updated }) {
               <SideSection>
                 <Entries data={data} onClick={setSelected} />
               </SideSection>
-              <MainSection>
-                {selected === null ? (
-                  <Radar data={data} />
-                ) : (
-                  <Details
-                    {...data.find((item) => item.name === selected)}
-                    close={() => setSelected(null)}
-                  />
-                )}
-              </MainSection>
+              <div className="space-y-6 lg:col-start-2 lg:col-span-2">
+                <MainSection>
+                  {selected === null ? (
+                    <Radar data={data} />
+                  ) : (
+                    <Details
+                      {...selectedData}
+                      close={() => setSelected(null)}
+                    />
+                  )}
+                </MainSection>
+                <LegendSection>
+                  <Legend selectedData={selectedData} />
+                </LegendSection>
+              </div>
             </div>
           </main>
         </div>
