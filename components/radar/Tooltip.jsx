@@ -45,7 +45,7 @@ const Tooltip = ({
           </h4>
           <h3 className="font-medium text-gray-900 mb-2">{name}</h3>
           <p className="text-sm text-gray-500  prose prose-base">
-            <ReactMarkdown>{description}</ReactMarkdown>
+            <ReactMarkdown linkTarget="_blank">{description}</ReactMarkdown>
           </p>
         </div>,
         el
