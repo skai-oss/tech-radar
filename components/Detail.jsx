@@ -28,7 +28,7 @@ const Details = ({ name, ring, quadrant, description, close }) => {
       <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-1">
         <div className="sm:col-span-1">
           <dd className="mt-1 prose prose-sm max-w-none">
-            <ReactMarkdown>{description}</ReactMarkdown>
+            <ReactMarkdown linkTarget="_blank">{description}</ReactMarkdown>
           </dd>
         </div>
       </dl>
