@@ -1,4 +1,5 @@
 import { Disclosure } from "@headlessui/react";
+import Link from "next/link";
 
 import { ChevronUpIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import {
@@ -9,7 +10,7 @@ import {
   getSubHeaders,
 } from "../utils/types";
 
-const RingDetails = ({ data, filter, defaultOpen, onClick, type }) => {
+const RingDetails = ({ data, filter, defaultOpen, type }) => {
   return (
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
@@ -45,13 +46,17 @@ const RingDetails = ({ data, filter, defaultOpen, onClick, type }) => {
                     </h3>
                     {items.map((item) => (
                       <li key={item.name} className="">
-                        <button
-                          onClick={() => onClick(item.name)}
-                          className="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75"
+                        <Link
+                          href={{
+                            pathname: "/",
+                            query: { name: item.name.toUpperCase() },
+                          }}
                         >
-                          <h4>{item.name}</h4>
-                          <ChevronRightIcon className="w-5 h-5 text-gray-500" />
-                        </button>
+                          <a className="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                            <h4>{item.name}</h4>
+                            <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+                          </a>
+                        </Link>
                       </li>
                     ))}
                   </>

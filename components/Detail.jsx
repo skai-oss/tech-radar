@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { XIcon } from "@heroicons/react/outline";
 
-const Details = ({ name, ring, quadrant, description, close }) => {
+const Details = ({ name, ring, quadrant, description }) => {
   const containerRef = useRef(null);
   useEffect(() => {
     containerRef.current.scrollIntoView({
@@ -18,9 +19,16 @@ const Details = ({ name, ring, quadrant, description, close }) => {
         className="text-lg leading-6 font-medium text-gray-900 flex justify-between mb-1"
       >
         <span>{name}</span>
-        <button onClick={close}>
-          <XIcon className="w-6 h-6 text-gray-500" />
-        </button>
+        <Link
+          href={{
+            pathname: "/",
+            query: {},
+          }}
+        >
+          <a>
+            <XIcon className="w-6 h-6 text-gray-500" />
+          </a>
+        </Link>
       </h2>
       <p className="text-gray-400 mb-2 font-light font-sm">
         {quadrant} <b>·</b> <i>{ring}</i>

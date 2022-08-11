@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Entries = ({ data, onClick }) => {
+const Entries = ({ data }) => {
   return (
     <>
       <Tab.Group>
@@ -50,7 +50,6 @@ const Entries = ({ data, onClick }) => {
                     data={data}
                     filter={filter}
                     defaultOpen={index === 0}
-                    onClick={onClick}
                   />
                 ))}
               </div>
@@ -66,7 +65,6 @@ const Entries = ({ data, onClick }) => {
                     data={data}
                     filter={filter}
                     defaultOpen={index === 0}
-                    onClick={onClick}
                   />
                 ))}
               </div>

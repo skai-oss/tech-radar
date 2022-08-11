@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import fs from "fs";
 import path from "path";
 import { useState } from "react";
@@ -28,8 +29,16 @@ export const getStaticProps = async () => {
 };
 
 export default function TechRadar({ data, updated }) {
-  const [selected, setSelected] = useState(null);
-  const selectedData = data.find((item) => item.name === selected) || null;
+  const {
+    query: { name },
+  } = useRouter();
+  const selectedData =
+    data.find((item) => {
+      if (name) {
+        return item.name.toUpperCase() === name.toUpperCase();
+      }
+      return false;
+    }) || null;
   return (
     <div>
       <Head>
@@ -45,17 +54,14 @@ export default function TechRadar({ data, updated }) {
 
             <div className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
               <SideSection>
-                <Entries data={data} onClick={setSelected} />
+                <Entries data={data} />
               </SideSection>
               <div className="space-y-6 lg:col-start-2 lg:col-span-2">
                 <MainSection>
-                  {selected === null ? (
+                  {selectedData === null ? (
                     <Radar data={data} />
                   ) : (
-                    <Details
-                      {...selectedData}
-                      close={() => setSelected(null)}
-                    />
+                    <Details {...selectedData} />
                   )}
                 </MainSection>
                 <LegendSection>
