@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import fs from "fs";
 import path from "path";
-import { useState } from "react";
 import csvToJson from "csvtojson";
 
 import Radar from "../components/radar/Radar";
