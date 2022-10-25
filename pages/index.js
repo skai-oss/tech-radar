@@ -65,6 +65,7 @@ export default function TechRadar({ data, updated }) {
                 </MainSection>
                 <LegendSection>
                   <Legend selectedData={selectedData} />
+                  Hello
                 </LegendSection>
               </div>
             </div>
