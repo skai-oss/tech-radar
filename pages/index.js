@@ -50,7 +50,7 @@ export default function TechRadar({ data, updated }) {
         <div className="min-h-full min-w-screen w-screen overflow-x-clip">
           <main className="py-10 w-full">
             <Header updated={updated} />
-
+            aedgf
             <div className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
               <SideSection>
                 <Entries data={data} />
