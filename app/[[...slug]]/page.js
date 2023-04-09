@@ -7,6 +7,8 @@ import { Entries } from "../SidePanel/Entries";
 import { Radar } from "../MainPanel/Radar/Radar";
 import { LegendDetails } from "../Legend/LegendDetails";
 
+export const dynamic = "auto";
+
 const Page = async ({ params: { slug } }) => {
   const radar = await fetchRadar(slug);
   return (
