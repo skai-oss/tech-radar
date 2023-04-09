@@ -1,3 +1,4 @@
+"use client";
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 
@@ -8,9 +9,9 @@ import {
   RINGS,
   RINGS_DISPLAY_NAMES,
   getSubHeaders,
-} from "../utils/types";
+} from "../integration/utils/types";
 
-const RingDetails = ({ data, filter, defaultOpen, type }) => {
+export const Details = ({ data, filter, defaultOpen, type }) => {
   return (
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
@@ -29,7 +30,7 @@ const RingDetails = ({ data, filter, defaultOpen, type }) => {
           </Disclosure.Button>
           <Disclosure.Panel className=" text-sm text-gray-500 -mt-1">
             <ul role="list" className="flex flex-col gap-2">
-              {getSubHeaders(type).map((subHeader, index) => {
+              {getSubHeaders(type).map((subHeader) => {
                 const items = data.filter(
                   (item) =>
                     convert(type === RINGS ? item.ring : item.quadrant) ===
@@ -38,18 +39,28 @@ const RingDetails = ({ data, filter, defaultOpen, type }) => {
                       subHeader
                 );
                 return items.length > 0 ? (
-                  <>
-                    <h3 className="mx-4 my-2" key={subHeader}>
+                  <div
+                    key={`${type}-${subHeader}-${filter}`}
+                    className="flex flex-col gap-2"
+                  >
+                    <h3 className="mx-4 my-2">
                       {type === RINGS
                         ? QUADRANTS_DISPLAY_NAMES[subHeader]
                         : RINGS_DISPLAY_NAMES[subHeader]}
                     </h3>
                     {items.map((item) => (
-                      <li key={item.name} className="">
+                      <li
+                        key={`${type}-${subHeader}-${filter}-${item.name}`}
+                        id={`${type}-${subHeader}-${filter}-${item.name}`}
+                        className=""
+                      >
                         <Link
                           href={{
                             pathname: "/",
-                            query: { name: item.name.toUpperCase() },
+                            query: {
+                              name: item.name.toUpperCase(),
+                              ring: item.ring.toUpperCase(),
+                            },
                           }}
                         >
                           <div className="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
@@ -59,7 +70,7 @@ const RingDetails = ({ data, filter, defaultOpen, type }) => {
                         </Link>
                       </li>
                     ))}
-                  </>
+                  </div>
                 ) : null;
               })}
             </ul>
@@ -69,5 +80,3 @@ const RingDetails = ({ data, filter, defaultOpen, type }) => {
     </Disclosure>
   );
 };
-
-export default RingDetails;

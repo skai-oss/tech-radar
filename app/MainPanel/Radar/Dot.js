@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const Dot = ({
+export const Dot = ({
   name,
   ring,
   quadrant,
@@ -29,5 +29,3 @@ const Dot = ({
     </>
   );
 };
-
-export default Dot;

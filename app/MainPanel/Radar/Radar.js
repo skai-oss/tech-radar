@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import Dot from "./Dot";
+import { Dot } from "./Dot";
 import {
   ADOPT,
   ASSESS,
@@ -12,13 +14,18 @@ import {
   TECHNIQUES,
   TOOLS,
   TRIAL,
-} from "../../utils/types";
+} from "../../integration/utils/types";
+import { useSearchParams } from "next/navigation";
 
 const Tooltip = dynamic(() => import("./Tooltip"), { ssr: false });
 
-const Radar = ({ data }) => {
+export const Radar = ({ data }) => {
   const [tooltip, setTooltip] = useState(null);
   const [closeInProgress, setCloseInProgress] = useState(false);
+
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
+  if (name) return null;
 
   const onMouseEnter = ({ ref, name, ring, quadrant, description }) => {
     closeInProgress && clearTimeout(closeInProgress);
@@ -129,5 +136,3 @@ const Radar = ({ data }) => {
     </>
   );
 };
-
-export default Radar;

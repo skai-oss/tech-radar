@@ -14,6 +14,11 @@ export const RINGS = "RINGS";
 export const convert = (str = "") =>
   str.replaceAll(" ", "").replaceAll("&", "").toUpperCase();
 
+export const isEqualOrEmpty = (str, to) => {
+  if (str === undefined || str === null || str === "") return true;
+  return str.toUpperCase() === to;
+};
+
 export const RINGS_DISPLAY_NAMES = {
   [ADOPT]: "Adopt",
   [TRIAL]: "Trial",
