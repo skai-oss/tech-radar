@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { XIcon } from "@heroicons/react/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const Details = ({ name, ring, quadrant, description }) => {
   const containerRef = useRef(null);
@@ -25,9 +25,7 @@ const Details = ({ name, ring, quadrant, description }) => {
             query: {},
           }}
         >
-          <a>
-            <XIcon className="w-6 h-6 text-gray-500" />
-          </a>
+            <XMarkIcon className="w-6 h-6 text-gray-500" />
         </Link>
       </h2>
       <p className="text-gray-400 mb-2 font-light font-sm">

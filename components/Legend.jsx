@@ -7,8 +7,8 @@ const Legend = ({ selectedData }) => (
     <li
       className={
         selectedData !== null &&
-        convert(selectedData.ring) !== ADOPT &&
-        "hidden"
+        convert(selectedData.ring) !== ADOPT ?
+        "hidden" : ""
       }
     >
       <h4>Adopt</h4>
@@ -23,8 +23,8 @@ const Legend = ({ selectedData }) => (
     <li
       className={
         selectedData !== null &&
-        convert(selectedData.ring) !== TRIAL &&
-        "hidden"
+        convert(selectedData.ring) !== TRIAL ?
+        "hidden" : ""
       }
     >
       <h4>Trial</h4>
@@ -40,8 +40,8 @@ const Legend = ({ selectedData }) => (
     <li
       className={
         selectedData !== null &&
-        convert(selectedData.ring) !== ASSESS &&
-        "hidden"
+        convert(selectedData.ring) !== ASSESS ?
+        "hidden" : ""
       }
     >
       <h4>Assess</h4>
@@ -54,7 +54,7 @@ const Legend = ({ selectedData }) => (
     </li>
     <li
       className={
-        selectedData !== null && convert(selectedData.ring) !== HOLD && "hidden"
+        selectedData !== null && convert(selectedData.ring) !== HOLD ? "hidden" : ""
       }
     >
       <h4>Hold</h4>
