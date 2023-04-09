@@ -1,4 +1,4 @@
-const Logo = () => (
+export const Logo = () => (
   <a href="https://skai.io" target="blank">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,5 +11,3 @@ const Logo = () => (
     </svg>
   </a>
 );
-
-export default Logo;

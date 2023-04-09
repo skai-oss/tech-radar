@@ -1,4 +1,4 @@
-const SideSection = ({ children }) => (
+export const SidePanel = ({ children }) => (
   <section
     aria-labelledby="changelog-title"
     className="lg:col-start-0 lg:col-span-1"
@@ -8,5 +8,3 @@ const SideSection = ({ children }) => (
     </div>
   </section>
 );
-
-export default SideSection;

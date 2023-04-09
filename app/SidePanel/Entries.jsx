@@ -1,12 +1,13 @@
-import { QUADRANTS, RINGS, FILTERS } from "../utils/types";
-import Details from "./Details";
+"use client";
+import { QUADRANTS, RINGS, FILTERS } from "../integration/utils/types";
+import { Details } from "./Details";
 import { Tab } from "@headlessui/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Entries = ({ data }) => {
+export const Entries = ({ data }) => {
   return (
     <>
       <Tab.Group>
@@ -75,5 +76,3 @@ const Entries = ({ data }) => {
     </>
   );
 };
-
-export default Entries;
