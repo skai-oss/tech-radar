@@ -41,7 +41,7 @@ OpsLevel,Adopt,Tools,"[OpsLevel](https://www.opslevel.com/) is a SaaS service ca
 
 In Skai, we use OpsLevel to improve service observability, harnessing its ""checks"" feature to drive high standards and increase team ownership.",New
 Playwright,Assess,Tools,"[Playwright](https://playwright.dev/) is an end-to-end test runner that enables cross-browser testing with an easy API. Specifically for Skai's use case, it allows us to link our tests with our code base, reducing testing flakiness and providing clearer ownership of scenarios.",New
-Python 3.10,Adopt,Programming languages & frameworks,"Python is a high-level, general-purpose programming language. It is gaining popularity as time goes by due to its code readability and ease of use.
+Python 3.10,Adopt,Languages & frameworks,"Python is a high-level, general-purpose programming language. It is gaining popularity as time goes by due to its code readability and ease of use.
 
 In Skai, it is used increasingly in Data research projects, AWS Lambda implementations, Pulumi implementations and other microservices (mainly operational).
 
@@ -109,8 +109,8 @@ Self-testing code,Adopt,Techniques,"Self-testing code exists when you can run a 
 Self-testing code is a key part of Continuous Integration, and it's said that you aren't doing continuous integration unless you have self-testing code. As a pillar of Continuous Integration, it is also a necessary part of Continuous Delivery.
 
 In Skai, we should continue utilizing our automation infrastructures (JUnit, Karate, Cucumber and more) to maintain a high testing coverage.",Adopt
-SingleStore (Memsql) ,Adopt,Platforms,"[SingleStore](https://www.singlestore.com/) is a distributed, relational, SQL database management system that features ANSI SQL support and is known for speed in data ingest, transaction processing, and query processing.
- 
+SingleStore (Memsql),Adopt,Platforms,"[SingleStore](https://www.singlestore.com/) is a distributed, relational, SQL database management system that features ANSI SQL support and is known for speed in data ingest, transaction processing, and query processing.
+
 In Skai, we've been using it for a few years across different grids to provide our users with a flexible and performant user experience.",Adopt
 Spring Boot,Adopt,Languages & frameworks,"[Spring Boot](https://spring.io/projects/spring-boot) is an open-source Java framework for creating Spring-based applications and services.
 
