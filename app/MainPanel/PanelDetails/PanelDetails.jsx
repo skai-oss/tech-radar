@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 export const PanelDetails = ({ data }) => {
+  const params = useParams();
+
   const containerRef = useRef(null);
   useEffect(() => {
     containerRef.current?.scrollIntoView({
@@ -29,7 +31,7 @@ export const PanelDetails = ({ data }) => {
         <span>{item.name}</span>
         <Link
           href={{
-            pathname: "/",
+            pathname: params.slug || "/",
             query: {},
           }}
         >
