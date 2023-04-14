@@ -10,8 +10,10 @@ import {
   RINGS_DISPLAY_NAMES,
   getSubHeaders,
 } from "../integration/utils/types";
+import { useParams } from "next/navigation";
 
 export const Details = ({ data, filter, defaultOpen, type }) => {
+  const params = useParams();
   return (
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
@@ -56,7 +58,10 @@ export const Details = ({ data, filter, defaultOpen, type }) => {
                       >
                         <Link
                           href={{
-                            pathname: "/",
+                            pathname:
+                              params.slug === "index"
+                                ? "/"
+                                : params.slug || "/",
                             query: {
                               name: item.name.toUpperCase(),
                               ring: item.ring.toUpperCase(),
