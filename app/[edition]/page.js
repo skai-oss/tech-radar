@@ -1,8 +1,8 @@
 import { TechRadarChart } from "./Radar/Radar";
-import { fetchData } from "./fetchData";
+import { fetchGraph } from "./fetchData";
 
 const Edition = async ({ params }) => {
-  const data = await fetchData(params.edition);
+  const data = await fetchGraph(params.edition);
   return <TechRadarChart data={data} />;
 };
 

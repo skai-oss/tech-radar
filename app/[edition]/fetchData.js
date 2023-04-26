@@ -1,3 +1,4 @@
+import { cache } from "react";
 import csvToJson from "csvtojson";
 import path from "node:path";
 import {
@@ -23,6 +24,20 @@ const ranges = {
   [TRIAL]: [95, 130],
   [ASSESS]: [180, 200],
   [HOLD]: [230, 240],
+};
+
+const weight = { [ADOPT]: 4, [TRIAL]: 3, [ASSESS]: 2, [HOLD]: 1 };
+
+const getTrend = (item) => {
+  if (item.prev_ring?.toUpperCase() === "NEW" || !item.prev_ring) return "NEW";
+  if (item.ring === item.prev_ring) return null;
+  if (
+    weight[item.ring?.toUpperCase()] > weight[item.prev_ring?.toUpperCase()]
+  ) {
+    return "UP";
+  } else {
+    return "DOWN";
+  }
 };
 
 export const convert = (str = "") =>
@@ -77,17 +92,45 @@ const calculatePosition = (quadrant, ring, name, memo) => {
   return memo[name];
 };
 
-export const prepareGraphData = (data) => {
+export const prepareGraphData = cache((data) => {
   const memo = {};
   return data.map(({ name, quadrant, ring, ...rest }) => {
     const { cx, cy } = calculatePosition(quadrant, ring, name, memo);
-    return { name, quadrant, ring, cx, cy, ...rest };
+    return {
+      name,
+      quadrant,
+      ring,
+      cx,
+      cy,
+      trend: getTrend({ ring, ...rest }),
+      ...rest,
+    };
   });
-};
+});
 
-export const fetchData = async (edition) => {
+export const fetchGraph = async (edition) => {
   const fileName = `${edition}.csv`;
   const filePath = path.join(process.cwd(), "public", fileName);
   const csvData = await csvToJson().fromFile(filePath);
   return prepareGraphData(csvData);
+};
+
+export const fetchList = async (edition) => {
+  const fileName = `${edition}.csv`;
+  const filePath = path.join(process.cwd(), "public", fileName);
+  const csvData = await csvToJson().fromFile(filePath);
+  return {
+    byRing: csvData.reduce((arr, item) => {
+      arr[item.ring] = arr[item.ring]
+        ? [...arr[item.ring], { ...item, trend: getTrend(item) }]
+        : [{ ...item, trend: getTrend(item) }];
+      return arr;
+    }, {}),
+    byQuadrant: csvData.reduce((arr, item) => {
+      arr[item.quadrant] = arr[item.quadrant]
+        ? [...arr[item.quadrant], { ...item, trend: getTrend(item) }]
+        : [{ ...item, trend: getTrend(item) }];
+      return arr;
+    }, {}),
+  };
 };
