@@ -23,7 +23,7 @@ export const Dot = ({ cx, cy, onMouseEnter, onMouseLeave, ...props }) => {
 
   return (
     <>
-      <g className="radar-dot">
+      <g>
         {isNew && (
           <circle
             r="5"
@@ -35,6 +35,7 @@ export const Dot = ({ cx, cy, onMouseEnter, onMouseLeave, ...props }) => {
           />
         )}
         <circle
+          className="radar-dot"
           ref={ref}
           r="3"
           cx={cx}
