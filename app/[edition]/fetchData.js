@@ -134,3 +134,11 @@ export const fetchList = async (edition) => {
     }, {}),
   };
 };
+
+export const getTechItem = async (edition, name) => {
+  const fileName = `${edition}.csv`;
+  const filePath = path.join(process.cwd(), "public", fileName);
+  const csvData = await csvToJson().fromFile(filePath);
+  const item = csvData.find((item) => item.name === name);
+  return { ...item, trend: getTrend(item) };
+};

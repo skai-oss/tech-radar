@@ -13,7 +13,6 @@ const trendString = {
 export const FilterBy = ({ data, edition }) => {
   const [filterBy, setFilterBy] = useState("byRing");
   const [open, setOpen] = useState(0);
-  console.log(open);
   return (
     <div className="flex flex-col">
       <div className="flex justify-end gap-2 items-center mb-4">
@@ -38,13 +37,15 @@ export const FilterBy = ({ data, edition }) => {
       <div className="rounded-lg overflow-hidden divide-y divide-gray-200 dark:divide-white/5">
         {Object.keys(data[filterBy]).map((filter, index) => (
           <div
-            onClick={() => (index !== open ? setOpen(index) : setOpen(null))}
             className={`collapse ${
               index === open ? "collapse-open" : "collapse-close"
             }`}
             key={filter}
           >
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={() => (index !== open ? setOpen(index) : setOpen(null))}
+            />
             <div className="collapse-title bg-gray-100 dark:bg-gray-900 flex items-center p-4">
               <div className="font-light text-xl">{filter}</div>
               <div className="flex flex-1" />
@@ -71,7 +72,9 @@ export const FilterBy = ({ data, edition }) => {
                       <div className="flex items-center gap-x-3">
                         <h2 className="min-w-0 text-sm leading-6">
                           <Link
-                            href={`${edition}/tech/${item.name}`}
+                            href={`${edition}/tech/${encodeURIComponent(
+                              item.name
+                            )}`}
                             className="flex gap-x-2"
                           >
                             <span className="truncate">{item.name}</span>
