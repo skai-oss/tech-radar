@@ -1,3 +1,5 @@
+import csvToJson from "csvtojson";
+import path from "node:path";
 import {
   PLATFORMS,
   LANGUAGES_FRAMEWORKS,
@@ -7,8 +9,8 @@ import {
   TRIAL,
   ASSESS,
   HOLD,
-  convert,
 } from "./types";
+
 const quadrants = {
   [PLATFORMS]: [95, 165],
   [LANGUAGES_FRAMEWORKS]: [15, 75],
@@ -17,10 +19,18 @@ const quadrants = {
 };
 
 const ranges = {
-  [ADOPT]: [25, 61],
-  [TRIAL]: [95, 111],
-  [ASSESS]: [140, 161],
-  [HOLD]: [190, 181],
+  [ADOPT]: [20, 75],
+  [TRIAL]: [95, 130],
+  [ASSESS]: [180, 200],
+  [HOLD]: [230, 240],
+};
+
+export const convert = (str = "") =>
+  str.replaceAll(" ", "").replaceAll("&", "").toUpperCase();
+
+export const isEqualOrEmpty = (str, to) => {
+  if (str === undefined || str === null || str === "") return true;
+  return str.toUpperCase() === to;
 };
 
 const getNonCollidingPosition = ({
@@ -36,12 +46,12 @@ const getNonCollidingPosition = ({
   for (let i = 0; i < maxAttempts; i++) {
     const range = Math.random() * (rangeMax - rangeMin) + rangeMin;
     const deg = Math.random() * (degMax - degMin) + degMin;
-    const x = 200 + range * Math.cos((deg * Math.PI) / 180);
-    const y = 200 - range * Math.sin((deg * Math.PI) / 180);
+    const x = 250 + range * Math.cos((deg * Math.PI) / 180);
+    const y = 250 - range * Math.sin((deg * Math.PI) / 180);
 
     const colliding = Object.values(memo).some(({ cx, cy }) => {
       const distance = Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2));
-      return distance < 10;
+      return distance < 12;
     });
 
     if (!colliding) {
@@ -50,7 +60,7 @@ const getNonCollidingPosition = ({
     }
   }
 
-  return newPosition || { cx: 200 + rangeMax, cy: 200 };
+  return newPosition || { cx: 250 + rangeMax, cy: 250 };
 };
 
 const calculatePosition = (quadrant, ring, name, memo) => {
@@ -69,8 +79,15 @@ const calculatePosition = (quadrant, ring, name, memo) => {
 
 export const prepareGraphData = (data) => {
   const memo = {};
-  return data.map(({ name, quadrant, ring, description }) => {
+  return data.map(({ name, quadrant, ring, ...rest }) => {
     const { cx, cy } = calculatePosition(quadrant, ring, name, memo);
-    return { name, quadrant, ring, description, cx, cy };
+    return { name, quadrant, ring, cx, cy, ...rest };
   });
+};
+
+export const fetchData = async (edition) => {
+  const fileName = `${edition}.csv`;
+  const filePath = path.join(process.cwd(), "public", fileName);
+  const csvData = await csvToJson().fromFile(filePath);
+  return prepareGraphData(csvData);
 };

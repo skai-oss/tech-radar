@@ -6,33 +6,31 @@
   @apply flex rounded-md items-center w-full px-2 py-2 text-sm cursor-pointer;
 }
 
+body {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
 .radar-axis {
-  stroke: #cbd5e1;
+  @apply stroke-current text-slate-400 dark:text-slate-600;
   stroke-dasharray: 0;
   stroke-width: 1;
 }
 
 .radar-quadrant-border {
-  stroke: #e2e8f0;
+  @apply stroke-current text-slate-300 dark:text-slate-700;
   stroke-dasharray: 0;
   stroke-width: 0.5;
   fill: transparent;
 }
 
 .radar-axis-label {
-  font: ui-sans-serif;
-  font-size: 0.75rem;
-  font-weight: 300;
-  fill: #64748b;
+  @apply fill-slate-600 dark:fill-slate-400 font-thin;
 }
 
 .radar-quadrant-label {
-  font: ui-sans-serif;
-  font-size: 0.45rem;
-  font-weight: 200;
-  fill: #64748b;
+  @apply fill-slate-600 dark:fill-slate-400 font-thin text-[10px];
 }
 
 .radar-dots {
-  fill: #0ea5e9;
+  @apply fill-sky-600 dark:fill-cyan-600 dark:opacity-90 stroke-sky-600 dark:stroke-cyan-600;
 }

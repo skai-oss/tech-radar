@@ -1,23 +1,20 @@
 import { Logo } from "./Logo";
-import { Versions } from "./Versions";
+import { ThemePicker } from "./ThemePicker";
+import { EditionSelector } from "./EditionSelector";
 
-export const Header = () => {
+export const Header = ({ defaultTheme }) => {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
-      <div className="flex items-center space-x-5">
-        <div className="flex-shrink-0">
-          <div className="flex relative justify-center items-center h-16 w-16 rounded-full overflow-clip bg-blue-500">
-            <Logo />
-          </div>
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Tech Radar</h1>
-          <div className="text-lg flex font-medium text-gray-500 gap-2 items-center">
-            Edition
-            <Versions />
-          </div>
-        </div>
+    <>
+      <div className="flex items-center gap-6 py-4">
+        <Logo />
+        <h1 className="text-3xl font-bold tracking-tight text-slate-800 dark:text-white md:text-6xl">
+          Tech Radar
+        </h1>
+        <EditionSelector inline />
+        <div className="flex-1" />
+        <ThemePicker defaultTheme={defaultTheme} />
       </div>
-    </div>
+      <EditionSelector />
+    </>
   );
 };

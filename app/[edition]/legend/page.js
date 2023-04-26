@@ -1,23 +1,10 @@
-"use client";
-
-import {
-  ADOPT,
-  TRIAL,
-  ASSESS,
-  HOLD,
-  isEqualOrEmpty,
-} from "../integration/utils/types";
-import { useSearchParams } from "next/navigation";
-
-export const LegendDetails = () => {
-  const searchParams = useSearchParams();
-  const ring = searchParams.get("ring");
+const Legend = () => {
   return (
-    <ul className="prose prose-sm max-w-none">
-      <li className="text-lg leading-6 font-medium text-gray-900 flex justify-between mb-1">
-        Ring definition
+    <ul className="prose prose-sm max-w-none text-slate-800 dark:text-slate-300">
+      <li className="text-lg leading-6 flex justify-between mb-1">
+        <h2>Ring definition</h2>
       </li>
-      <li className={!isEqualOrEmpty(ring, ADOPT) ? "hidden" : ""}>
+      <li>
         <h4>Adopt</h4>
         <p>
           The following items are the Skai standard and are widely used in our
@@ -27,7 +14,7 @@ export const LegendDetails = () => {
           Teams should adhere to these standards.
         </p>
       </li>
-      <li className={!isEqualOrEmpty(ring, TRIAL) ? "hidden" : ""}>
+      <li>
         <h4>Trial</h4>
         <p>
           The following items are part of our tech roadmap. We are already
@@ -38,7 +25,7 @@ export const LegendDetails = () => {
           these trials.
         </p>
       </li>
-      <li className={!isEqualOrEmpty(ring, ASSESS) ? "hidden" : ""}>
+      <li>
         <h4>Assess</h4>
         <p>
           The following items have a high potential for our tech roadmap.
@@ -47,7 +34,7 @@ export const LegendDetails = () => {
           Teams are welcome to explore these items.
         </p>
       </li>
-      <li className={!isEqualOrEmpty(ring, HOLD) ? "hidden" : ""}>
+      <li>
         <h4>Hold</h4>
         <p>
           The following items shouldn’t be used in new projects in Skai. If it
@@ -57,3 +44,5 @@ export const LegendDetails = () => {
     </ul>
   );
 };
+
+export default Legend;

@@ -1,8 +1,9 @@
+"use client";
 import ReactDOM from "react-dom";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-const Tooltip = ({
+export const Tooltip = ({
   top,
   left,
   name,
@@ -11,10 +12,11 @@ const Tooltip = ({
   description,
   onTooltipAccess,
   onMouseLeave,
+  ...props
 }) => {
   const [el, setEl] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = document.createElement("span");
     document.body.appendChild(el);
     setEl(el);
@@ -52,5 +54,3 @@ const Tooltip = ({
       )
     : null;
 };
-
-export default Tooltip;
