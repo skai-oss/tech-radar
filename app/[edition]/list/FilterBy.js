@@ -12,6 +12,8 @@ const trendString = {
 
 export const FilterBy = ({ data, edition }) => {
   const [filterBy, setFilterBy] = useState("byRing");
+  const [open, setOpen] = useState(0);
+  console.log(open);
   return (
     <div className="flex flex-col">
       <div className="flex justify-end gap-2 items-center mb-4">
@@ -33,20 +35,28 @@ export const FilterBy = ({ data, edition }) => {
           </span>
         </div>
       </div>
-      <div className="rounded-lg overflow-hidden">
-        {Object.keys(data[filterBy]).map((filter) => (
+      <div className="rounded-lg overflow-hidden divide-y divide-gray-200 dark:divide-white/5">
+        {Object.keys(data[filterBy]).map((filter, index) => (
           <div
-            className="group outline-none accordion-section"
-            tabIndex="1"
+            onClick={() => (index !== open ? setOpen(index) : setOpen(null))}
+            className={`collapse ${
+              index === open ? "collapse-open" : "collapse-close"
+            }`}
             key={filter}
           >
-            <div className="group bg-gray-100 dark:bg-gray-900  flex justify-between px-4 py-3 items-center transition transition ease duration-300 cursor-pointer pr-10 relative">
+            <input type="checkbox" />
+            <div className="collapse-title bg-gray-100 dark:bg-gray-900 flex items-center p-4">
               <div className="font-light text-xl">{filter}</div>
-              <div className="h-8 w-8 border border-gray-400 dark:border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-300 group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2">
+              <div className="flex flex-1" />
+              <div
+                className={`${
+                  index === open ? "rotate-180" : "rotate-0"
+                } h-8 w-8 border border-gray-400 dark:border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-300`}
+              >
                 <ChevronDownIcon className="h-4" />
               </div>
             </div>
-            <div className="group-focus:max-h-fit max-h-0 bg-gray-50 dark:bg-gray-800 overflow-hidden px-4 transition ease duration-300">
+            <div className="collapse-content">
               <ul
                 role="list"
                 className="divide-y divide-gray-200 dark:divide-white/5"
