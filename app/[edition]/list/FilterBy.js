@@ -10,6 +10,16 @@ const trendString = {
   NEW: "New",
 };
 
+const sortFor = (filterFor) => (a, b) => {
+  const sortBy = filterFor === "byRing" ? "quadrant" : "ring";
+  if (a[sortBy] === b[sortBy]) return a.name.localeCompare(b.name);
+  return a[sortBy] > b[sortBy] ? 1 : -1;
+};
+
+const getItems = (data, filterBy, filter) => {
+  return data[filterBy][filter].sort(sortFor(filterBy));
+};
+
 export const FilterBy = ({ data, edition }) => {
   const [filterBy, setFilterBy] = useState("byRing");
   const [open, setOpen] = useState(0);
@@ -21,13 +31,21 @@ export const FilterBy = ({ data, edition }) => {
           <span className="isolate inline-flex rounded-md shadow-sm">
             <button
               onClick={() => setFilterBy("byQuadrant")}
-              className="relative inline-flex items-center rounded-l-md bg-white dark:bg-white dark:bg-opacity-20 px-3 py-2 text-sm  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:ring-slate-800 dark:hover:bg-slate-700 focus:z-10"
+              className={`${
+                filterBy === "byQuadrant"
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : "bg-white dark:bg-white dark:bg-opacity-20"
+              } relative inline-flex items-center rounded-l-md  px-3 py-2 text-sm  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:ring-slate-800 dark:hover:bg-slate-700 focus:z-10`}
             >
               <span className="h-6 flex items-center">Quadrant</span>
             </button>
             <button
               onClick={() => setFilterBy("byRing")}
-              className="relative -ml-px inline-flex items-center rounded-r-md bg-white dark:bg-white dark:bg-opacity-20 px-3 py-2 text-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 focus:z-10"
+              className={`${
+                filterBy === "byRing"
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : "bg-white dark:bg-white dark:bg-opacity-20"
+              } relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 focus:z-10`}
             >
               <span className="h-6 flex items-center">Ring</span>
             </button>
@@ -63,7 +81,7 @@ export const FilterBy = ({ data, edition }) => {
                 className="divide-y divide-gray-200 dark:divide-white/5"
                 key={filter}
               >
-                {data[filterBy][filter].map((item) => (
+                {getItems(data, filterBy, filter).map((item) => (
                   <li
                     key={item.name}
                     className="relative flex items-center space-x-4 py-4"

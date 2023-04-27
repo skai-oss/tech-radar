@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import Link from "next/link";
 
 export const Dot = ({
   cx,
@@ -7,6 +8,7 @@ export const Dot = ({
   onMouseEnter,
   onMouseLeave,
   trend,
+  edition,
   ...props
 }) => {
   const ref = useRef(null);
@@ -22,7 +24,10 @@ export const Dot = ({
   `;
 
   return (
-    <>
+    <Link
+      href={`/${edition}/tech/${encodeURIComponent(props.name)}`}
+      className="svg-anchor"
+    >
       <g>
         {trend === "NEW" && (
           <circle
@@ -47,6 +52,6 @@ export const Dot = ({
           <path d={d} strokeWidth="1" fill="none" />
         )}
       </g>
-    </>
+    </Link>
   );
 };

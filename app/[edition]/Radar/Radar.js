@@ -27,7 +27,7 @@ export const QUADRANTS_DISPLAY_NAMES = {
   [TOOLS]: "Tools",
 };
 
-export const TechRadarChart = ({ data }) => {
+export const TechRadarChart = ({ data, edition }) => {
   const [tooltip, setTooltip] = useState(null);
   const [closeInProgress, setCloseInProgress] = useState(0);
 
@@ -64,10 +64,10 @@ export const TechRadarChart = ({ data }) => {
           <text x="500" y="15" textAnchor="end">
             {QUADRANTS_DISPLAY_NAMES[LANGUAGES_FRAMEWORKS]}
           </text>
-          <text x="0" y="500">
+          <text x="0" y="490">
             {QUADRANTS_DISPLAY_NAMES[TECHNIQUES]}
           </text>
-          <text x="500" y="500" textAnchor="end">
+          <text x="500" y="490" textAnchor="end">
             {QUADRANTS_DISPLAY_NAMES[TOOLS]}
           </text>
         </g>
@@ -117,6 +117,7 @@ export const TechRadarChart = ({ data }) => {
             <Dot
               key={item.name}
               {...item}
+              edition={edition}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
             />

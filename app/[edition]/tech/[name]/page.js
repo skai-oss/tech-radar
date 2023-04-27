@@ -14,18 +14,18 @@ const Tech = async ({ params }) => {
   );
   return (
     <div>
-      <h4 className="font-medium mb-2 text-xs">
-        {quadrant} <b>·</b> <i>{ring}</i>{" "}
+      <h3 className="font-thin text-4xl flex gap-1 items-center">{name}</h3>
+      <h4 className="font-medium mb-8 text-xs italic">
+        {quadrant} <b>·</b> {ring}
         {trend && (
           <>
-            <b>·</b> <i>{trendString[trend]}</i>
+            <b>·</b> {trendString[trend]}
           </>
         )}
       </h4>
-      <h3 className="font-2xl mb-2">{name}</h3>
-      <p className="text-md prose prose-base">
+      <article className="prose text-slate-800 prose-ul:text-slate-800 font-light prose-a:font-light prose-a:text-slate-800 dark:text-slate-100 dark:prose-a:text-slate-100">
         <ReactMarkdown linkTarget="_blank">{description}</ReactMarkdown>
-      </p>
+      </article>
     </div>
   );
 };

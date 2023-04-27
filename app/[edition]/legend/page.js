@@ -1,11 +1,11 @@
 const Legend = () => {
   return (
-    <ul className="prose prose-sm max-w-none text-slate-800 dark:text-slate-300">
-      <li className="text-lg leading-6 flex justify-between mb-1">
-        <h2>Ring definition</h2>
+    <ul className=" mt-0 prose text-slate-800 prose-h2:text-slate-800 dark:prose-h2:text-slate-100 prose-h4:text-slate-800 dark:prose-h4:text-slate-100 prose-ul:text-slate-800 font-light prose-a:font-light prose-a:text-slate-800 dark:text-slate-100 dark:prose-a:text-slate-100">
+      <li>
+        <h2 className="font-thin text-4xl mt-0">Ring definition</h2>
       </li>
       <li>
-        <h4>Adopt</h4>
+        <h4 className="font-thin text-2xl">Adopt</h4>
         <p>
           The following items are the Skai standard and are widely used in our
           production systems, accompanied by clear guidelines, best practices
@@ -15,7 +15,7 @@ const Legend = () => {
         </p>
       </li>
       <li>
-        <h4>Trial</h4>
+        <h4 className="font-thin text-2xl">Trial</h4>
         <p>
           The following items are part of our tech roadmap. We are already
           experimenting with them and might have limited usage in our production
@@ -26,7 +26,7 @@ const Legend = () => {
         </p>
       </li>
       <li>
-        <h4>Assess</h4>
+        <h4 className="font-thin text-2xl">Assess</h4>
         <p>
           The following items have a high potential for our tech roadmap.
           However, we haven’t tried them so far.
@@ -35,7 +35,7 @@ const Legend = () => {
         </p>
       </li>
       <li>
-        <h4>Hold</h4>
+        <h4 className="font-thin text-2xl">Hold</h4>
         <p>
           The following items shouldn’t be used in new projects in Skai. If it
           already exists, keep it in minimal maintenance mode or deprecate it.

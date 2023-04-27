@@ -46,9 +46,9 @@ export const Tooltip = ({
             {quadrant} <b>·</b> <i>{ring}</i>
           </h4>
           <h3 className="font-medium text-gray-900 mb-2">{name}</h3>
-          <p className="text-sm text-gray-500  prose prose-base">
+          <article className="text-sm text-gray-500  prose prose-base">
             <ReactMarkdown linkTarget="_blank">{description}</ReactMarkdown>
-          </p>
+          </article>
         </div>,
         el
       )
