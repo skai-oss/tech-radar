@@ -15,7 +15,7 @@ export const EditionSelector = ({ inline }) => {
   return (
     <Menu
       as="div"
-      className={`relative text-left ${
+      className={`relative text-left z-10 ${
         inline ? "hidden md:block" : "block md:hidden w-full mt-6"
       }`}
     >
